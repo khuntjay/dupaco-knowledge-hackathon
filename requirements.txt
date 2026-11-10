@@ -1,0 +1,1 @@
+# Standard-library-only submission. No external Python dependencies or API keys.

@@ -1,0 +1,9 @@
+# Version-aware snapshot knowledge engine
+
+The knowledge engine accepts the harness's snapshots in chronological order. Each answer selects the latest downloaded website state on or before the requested date, with no live site access. It works offline, uses **Python 3.11 standard library only**, and requires **no API keys**.
+
+For high-risk rate questions, the program parses actual Markdown table rows from official savings, certificates, loan, mortgage, checking, and credit-card pages. It respects product names, terms, vehicle-model years, balance tiers, and the distinction between dividend rates, APY, and APR. It selects authoritative, product-specific rate tables ahead of stale blog, calculator, or promotion text. It avoids mentioning competing stale numbers in the member-facing answer, since one wrong rate makes an answer misleading. Unknown terms and unpublished loan rates are declined rather than guessed.
+
+For non-tabular questions, it uses source-grounded intent routing for published branch, membership, contact, and product information; a deterministic in-memory lexical index provides the fallback. The fallback ranks specific product pages ahead of news and blog posts. Each answer returns a source URL and crawl ID wherever evidence exists. `conflicts()` compares like-for-like structured table facts across snapshots, grouped by the exact product and tier, identifies changed published values, and favors the newest authoritative evidence. It does not confuse legitimate tier differences with contradictions.
+
+**Run:** from the repository root: `python harness/run_eval.py --submission submission --eval eval/public_eval.jsonl --out results/submission`. The first run automatically expands the five snapshot archives. Do not edit the scorer, redistribute the supplied website data, or claim that this public score guarantees hidden-set performance.
